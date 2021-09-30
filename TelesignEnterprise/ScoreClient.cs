@@ -3,13 +3,14 @@ using _ScoreClient = Telesign.ScoreClient;
 
 namespace TelesignEnterprise
 {
+    using Telesign.Strategy;
+
     public class ScoreClient : _ScoreClient
     {
         public ScoreClient(string customerId,
             string apiKey)
             : base(customerId,
-                apiKey,
-                "https://rest-ww.telesign.com")
+                apiKey)
         { }
 
         public ScoreClient(string customerId,
@@ -24,16 +25,18 @@ namespace TelesignEnterprise
             string apiKey,
             string restEndpoint,
             int timeout,
-            WebProxy proxy,
+            IWebProxy proxy,
             string proxyUsername,
-            string proxyPassword)
+            string proxyPassword,
+            IHeadersStrategy strategy = null)
             : base(customerId,
                 apiKey,
                 restEndpoint,
-                timeout: timeout,
-                proxy: proxy,
-                proxyUsername: proxyUsername,
-                proxyPassword: proxyPassword)
+                timeout,
+                proxy,
+                proxyUsername,
+                proxyPassword,
+                strategy)
         { }
     }
 }

@@ -4,6 +4,8 @@ using Telesign;
 
 namespace TelesignEnterprise
 {
+    using Telesign.Strategy;
+
     /// <summary>
     /// The Verify API delivers phone-based verification and two-factor authentication using a time-based, one-time passcode
     /// sent via SMS message, Voice call or Push Notification.
@@ -21,8 +23,7 @@ namespace TelesignEnterprise
         public VerifyClient(string customerId,
                             string apiKey)
                 : base(customerId,
-                       apiKey,
-                       restEndpoint: "https://rest-ww.telesign.com")
+                       apiKey)
         { }
 
         public VerifyClient(string customerId,
@@ -37,16 +38,18 @@ namespace TelesignEnterprise
                              string apiKey,
                              string restEndpoint,
                              int timeout,
-                             WebProxy proxy,
+                             IWebProxy proxy,
                              string proxyUsername,
-                             string proxyPassword)
+                             string proxyPassword,
+                             IHeadersStrategy strategy = null)
             : base(customerId,
                    apiKey,
-                   restEndpoint: restEndpoint,
-                   timeout: timeout,
-                   proxy: proxy,
-                   proxyUsername: proxyUsername,
-                   proxyPassword: proxyPassword)
+                   restEndpoint,
+                   timeout,
+                   proxy,
+                   proxyUsername,
+                   proxyPassword,
+                   strategy)
         { }
 
         /// <summary>

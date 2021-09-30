@@ -4,6 +4,8 @@ using _PhoneIdClient = Telesign.PhoneIdClient;
 
 namespace TelesignEnterprise
 {
+    using Telesign.Strategy;
+
     /// <summary>
     /// PhoneID is a set of REST APIs that deliver deep phone number data attributes that help optimize the end user
     /// verification process and evaluate risk.
@@ -23,8 +25,7 @@ namespace TelesignEnterprise
         public PhoneIdClient(string customerId,
                              string apiKey)
             : base(customerId,
-                   apiKey,
-                   "https://rest-ww.telesign.com")
+                   apiKey)
         { }
 
         public PhoneIdClient(string customerId,
@@ -39,16 +40,18 @@ namespace TelesignEnterprise
                              string apiKey,
                              string restEndpoint,
                              int timeout,
-                             WebProxy proxy,
+                             IWebProxy proxy,
                              string proxyUsername,
-                             string proxyPassword)
+                             string proxyPassword,
+                             IHeadersStrategy strategy = null)
             : base(customerId,
                    apiKey,
                    restEndpoint,
-                   timeout: timeout,
-                   proxy: proxy,
-                   proxyUsername: proxyUsername,
-                   proxyPassword: proxyPassword)
+                   timeout,
+                   proxy,
+                   proxyUsername,
+                   proxyPassword,
+                   strategy)
         { }
 
         /// <summary>

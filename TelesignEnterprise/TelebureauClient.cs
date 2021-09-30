@@ -4,6 +4,8 @@ using Telesign;
 
 namespace TelesignEnterprise
 {
+    using Telesign.Strategy;
+
     /// <summary>
     /// TeleBureau is a service is based on TeleSign's watchlist, which is a proprietary database containing verified phone
     /// numbers of users known to have committed online fraud.TeleSign crowd-sources this information from its customers.
@@ -18,8 +20,7 @@ namespace TelesignEnterprise
         public TelebureauClient(string customerId,
                                  string apiKey)
             : base(customerId,
-                   apiKey,
-                   restEndpoint: "https://rest-ww.telesign.com")
+                   apiKey)
         { }
 
         public TelebureauClient(string customerId,
@@ -34,16 +35,18 @@ namespace TelesignEnterprise
                              string apiKey,
                              string restEndpoint,
                              int timeout,
-                             WebProxy proxy,
+                             IWebProxy proxy,
                              string proxyUsername,
-                             string proxyPassword)
+                             string proxyPassword,
+                             IHeadersStrategy strategy = null)
             : base(customerId,
                    apiKey,
-                   restEndpoint: restEndpoint,
-                   timeout: timeout,
-                   proxy: proxy,
-                   proxyUsername: proxyUsername,
-                   proxyPassword: proxyPassword)
+                   restEndpoint,
+                   timeout,
+                   proxy,
+                   proxyUsername,
+                   proxyPassword,
+                   strategy)
         { }
 
         /// <summary>
