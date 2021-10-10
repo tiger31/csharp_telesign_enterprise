@@ -4,6 +4,7 @@ using Telesign;
 
 namespace TelesignEnterprise
 {
+    using System.Threading.Tasks;
     using Telesign.Strategy;
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace TelesignEnterprise
 
         /// <summary>
         /// Creates a telebureau event corresponding to supplied data.
-        /// <p>
+        /// 
         /// See https://developer.telesign.com/docs/telebureau-api for detailed API documentation.
         /// </summary>
         public TelesignResponse CreateEvent(string phoneNumber, string fraudType, string occurredAt, Dictionary<string, string> parameters = null)
@@ -67,6 +68,26 @@ namespace TelesignEnterprise
 
             return this.Post(TELEBUREAU_CREATE_RESOURCE, parameters);
         }
+        
+        /// <summary>
+        /// Creates a telebureau event corresponding to supplied data.
+        /// 
+        /// See https://developer.telesign.com/docs/telebureau-api for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> CreateEventAsync(string phoneNumber, string fraudType, string occurredAt, Dictionary<string, string> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            parameters.Add("phone_number", phoneNumber);
+            parameters.Add("fraud_type", fraudType);
+            parameters.Add("occurred_at", occurredAt);
+
+            return this.PostAsync(TELEBUREAU_CREATE_RESOURCE, parameters);
+        }
+
 
         /// <summary>
         /// Creates a telebureau event corresponding to supplied data.
@@ -76,6 +97,16 @@ namespace TelesignEnterprise
         public TelesignResponse RetrieveEvent(string referenceId, Dictionary<string, string> parameters = null)
         {
             return this.Get(string.Format(TELEBUREAU_RETRIEVE_RESOURCE, referenceId), parameters);
+        }
+        
+        /// <summary>
+        /// Creates a telebureau event corresponding to supplied data.
+        ///
+        /// See https://developer.telesign.com/docs/telebureau-api for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> RetrieveEventAsync(string referenceId, Dictionary<string, string> parameters = null)
+        {
+            return this.GetAsync(string.Format(TELEBUREAU_RETRIEVE_RESOURCE, referenceId), parameters);
         }
 
         /// <summary>
@@ -88,5 +119,17 @@ namespace TelesignEnterprise
         {
             return this.Delete(string.Format(TELEBUREAU_DELETE_RESOURCE, referenceId), parameters);
         }
+
+        /// <summary>
+        /// Deletes a previously submitted fraud event. You make this call in your web application after completion of the
+        /// create transaction for a telebureau event.
+        ///
+        /// See https://developer.telesign.com/docs/telebureau-api for detailed API documentation.
+        /// </summary>>
+        public Task<TelesignResponse> DeleteEventAsync(string referenceId, Dictionary<string, string> parameters = null)
+        {
+            return this.DeleteAsync(string.Format(TELEBUREAU_DELETE_RESOURCE, referenceId), parameters);
+        }
+
     }
 }

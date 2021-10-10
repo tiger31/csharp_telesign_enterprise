@@ -4,6 +4,7 @@ using _PhoneIdClient = Telesign.PhoneIdClient;
 
 namespace TelesignEnterprise
 {
+    using System.Threading.Tasks;
     using Telesign.Strategy;
 
     /// <summary>
@@ -68,6 +69,20 @@ namespace TelesignEnterprise
         }
 
         /// <summary>
+        /// PhoneID is a set of REST APIs that deliver deep phone number data attributes that help optimize the end user
+        /// verification process and evaluate risk.
+        ///
+        /// TeleSign PhoneID provides a wide range of risk assessment indicators on the number to help confirm user identity,
+        /// delivering real-time decision making throughout the number lifecycle and ensuring only legitimate users are
+        /// creating accounts and accessing your applications.
+        /// </summary>
+        public Task<TelesignResponse> StandardAsync(string phoneNumber, Dictionary<string, string> parameters = null)
+        {
+            return this.GetAsync(string.Format(PHONEID_STANDARD_RESOURCE, phoneNumber), parameters);
+        }
+
+
+        /// <summary>
         /// Score is an API that delivers reputation scoring based on phone number intelligence, traffic patterns, machine
         /// learning, and a global data consortium.
         ///
@@ -83,6 +98,24 @@ namespace TelesignEnterprise
             parameters.Add("ucid", ucid);
 
             return this.Get(string.Format(PHONEID_SCORE_RESOURCE, phoneNumber), parameters);
+        }
+
+        /// <summary>
+        /// Score is an API that delivers reputation scoring based on phone number intelligence, traffic patterns, machine
+        /// learning, and a global data consortium.
+        ///
+        /// See https://developer.telesign.com/docs/rest_api-phoneid-score for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> ScoreAsync(string phoneNumber, string ucid, Dictionary<string, string> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            parameters.Add("ucid", ucid);
+
+            return this.GetAsync(string.Format(PHONEID_SCORE_RESOURCE, phoneNumber), parameters);
         }
 
         /// <summary>
@@ -104,6 +137,24 @@ namespace TelesignEnterprise
         }
 
         /// <summary>
+        /// The PhoneID Contact API delivers contact information related to the subscriber's phone number to provide another
+        /// set of indicators for established risk engines.
+        ///
+        /// See https://developer.telesign.com/docs/rest_api-phoneid-contact for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> ContactAsync(string phoneNumber, string ucid, Dictionary<string, string> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            parameters.Add("ucid", ucid);
+
+            return this.GetAsync(string.Format(PHONEID_CONTACT_RESOURCE, phoneNumber), parameters);
+        }
+
+        /// <summary>
         /// The PhoneID Live API delivers insights such as whether a phone is active or disconnected, a device is reachable
         /// or unreachable and its roaming status.
         ///
@@ -122,6 +173,24 @@ namespace TelesignEnterprise
         }
 
         /// <summary>
+        /// The PhoneID Live API delivers insights such as whether a phone is active or disconnected, a device is reachable
+        /// or unreachable and its roaming status.
+        ///
+        /// See https://developer.telesign.com/docs/rest_api-phoneid-live for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> LiveAsync(string phoneNumber, string ucid, Dictionary<string, string> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            parameters.Add("ucid", ucid);
+
+            return this.GetAsync(string.Format(PHONEID_LIVE_RESOURCE, phoneNumber), parameters);
+        }
+
+        /// <summary>
         /// The PhoneID Number Deactivation API determines whether a phone number has been deactivated and when, based on
         /// carriers' phone number data and TeleSign's proprietary analysis.
         ///
@@ -137,6 +206,24 @@ namespace TelesignEnterprise
             parameters.Add("ucid", ucid);
 
             return this.Get(string.Format(PHONEID_NUMBER_DEACTIVATION_RESOURCE, phoneNumber), parameters);
+        }
+
+        /// <summary>
+        /// The PhoneID Number Deactivation API determines whether a phone number has been deactivated and when, based on
+        /// carriers' phone number data and TeleSign's proprietary analysis.
+        ///
+        /// See https://developer.telesign.com/docs/rest_api-phoneid-number-deactivation for detailed API documentation.
+        /// </summary>
+        public Task<TelesignResponse> NumberDeactivationAsync(string phoneNumber, string ucid, Dictionary<string, string> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            parameters.Add("ucid", ucid);
+
+            return this.GetAsync(string.Format(PHONEID_NUMBER_DEACTIVATION_RESOURCE, phoneNumber), parameters);
         }
     }
 }
