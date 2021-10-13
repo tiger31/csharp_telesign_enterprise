@@ -3,6 +3,7 @@ using _VoiceClient = Telesign.VoiceClient;
 
 namespace TelesignEnterprise
 {
+    using System.Net.Http;
     using Telesign.Strategy;
 
     public class VoiceClient : _VoiceClient
@@ -28,7 +29,8 @@ namespace TelesignEnterprise
             WebProxy proxy,
             string proxyUsername,
             string proxyPassword,
-            IHeadersStrategy strategy = null)
+            IHeadersStrategy strategy = null,
+            HttpClient client = null)
             : base(customerId,
                 apiKey,
                 restEndpoint,
@@ -36,7 +38,8 @@ namespace TelesignEnterprise
                 proxy,
                 proxyUsername,
                 proxyPassword,
-                strategy)
+                strategy,
+                client)
         { }    
         
     }

@@ -4,6 +4,7 @@ using _PhoneIdClient = Telesign.PhoneIdClient;
 
 namespace TelesignEnterprise
 {
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Telesign.Strategy;
 
@@ -44,7 +45,8 @@ namespace TelesignEnterprise
                              IWebProxy proxy,
                              string proxyUsername,
                              string proxyPassword,
-                             IHeadersStrategy strategy = null)
+                             IHeadersStrategy strategy = null,
+                             HttpClient client = null)
             : base(customerId,
                    apiKey,
                    restEndpoint,
@@ -52,7 +54,8 @@ namespace TelesignEnterprise
                    proxy,
                    proxyUsername,
                    proxyPassword,
-                   strategy)
+                   strategy,
+                   client)
         { }
 
         /// <summary>

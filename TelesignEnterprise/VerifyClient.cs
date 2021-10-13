@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using Telesign;
-
-namespace TelesignEnterprise
+﻿namespace TelesignEnterprise
 {
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
+    using Telesign;
     using Telesign.Strategy;
+
 
     /// <summary>
     /// The Verify API delivers phone-based verification and two-factor authentication using a time-based, one-time passcode
@@ -42,7 +43,8 @@ namespace TelesignEnterprise
                              IWebProxy proxy,
                              string proxyUsername,
                              string proxyPassword,
-                             IHeadersStrategy strategy = null)
+                             IHeadersStrategy strategy = null,
+                             HttpClient client = null)
             : base(customerId,
                    apiKey,
                    restEndpoint,
@@ -50,7 +52,8 @@ namespace TelesignEnterprise
                    proxy,
                    proxyUsername,
                    proxyPassword,
-                   strategy)
+                   strategy,
+                   client)
         { }
 
         /// <summary>

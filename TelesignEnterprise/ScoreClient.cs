@@ -3,6 +3,7 @@ using _ScoreClient = Telesign.ScoreClient;
 
 namespace TelesignEnterprise
 {
+    using System.Net.Http;
     using Telesign.Strategy;
 
     public class ScoreClient : _ScoreClient
@@ -28,7 +29,8 @@ namespace TelesignEnterprise
             IWebProxy proxy,
             string proxyUsername,
             string proxyPassword,
-            IHeadersStrategy strategy = null)
+            IHeadersStrategy strategy = null,
+            HttpClient client = null)
             : base(customerId,
                 apiKey,
                 restEndpoint,
